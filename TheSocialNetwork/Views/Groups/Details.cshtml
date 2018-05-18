@@ -1,0 +1,82 @@
+﻿@model TheSocialNetwork.Models.Groups.GroupDetailViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+<script src="∼/Scripts/jquery-1.10.2.js"></script>
+<script src="∼/Scripts/jquery.unobtrusive-ajax.js"></script>
+
+
+
+<h2>Details</h2>
+
+<div>
+    <h4>Group</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+
+        <dt>Members</dt>
+        @foreach (var item in Model.Members)
+        {
+            <dd>
+                @Html.DisplayFor(modelItem => item)
+            </dd>
+        }
+    </dl>
+</div>
+
+
+<script type="text/javascript">
+    function getresult(data) {
+        alert(data.result);
+    };
+</script> 
+@using (Ajax.BeginForm("Join", "Groups", new AjaxOptions
+{
+    HttpMethod = "POST",
+    OnSuccess = "getresult"
+}))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.Id)
+    <div class="col-md-1">
+        <input type="submit" value="Join" class="btn btn-default" /> 
+    </div>
+}
+
+
+@using (Ajax.BeginForm("Leave", "Groups", new AjaxOptions
+{
+    HttpMethod = "POST",
+    OnSuccess = "getresult"
+}))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.Id)
+    <div class="col-md-1">
+        <input type="submit" value="Leave" class="btn btn-default" />
+    </div>
+}
+<div>
+    @Html.ActionLink("Back to List", "Index")
+
+
+</div>

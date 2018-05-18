@@ -1,0 +1,81 @@
+﻿@model TheSocialNetwork.Models.Messages.ReadUsersMessagesViewModel
+
+@{
+    ViewBag.Title = "Messages";
+}
+<link href="~/CSS/MessageStyle.css" rel="stylesheet" />
+<h2>Messages</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Messages.FirstOrDefault().Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Messages.FirstOrDefault().SendDate)
+        </th>
+        <th>
+            @Html.DisplayFor(model => model.UnreadMessages) <text> unread</text>
+        </th>
+    </tr>
+    <!--
+        @foreach (var item in Model.Messages)
+        { 
+
+                <tr class="@(@item.IsRead ? "read" : "unread")">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SendDate)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Details", "Details", new { id = item.ID })
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                    </td>
+                </tr>
+
+    }
+    -->
+
+    @foreach (var item in Model.Messages)
+    {
+        if (!item.IsRead)
+        {
+            <tr class="label-danger">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SendDate)
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = item.ID })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                </td>
+            </tr>
+        }
+        else
+        {
+            <tr class="text-success">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SendDate)
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = item.ID })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                </td>
+            </tr>
+        }
+    }
+</table>
+
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

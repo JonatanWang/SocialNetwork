@@ -1,0 +1,28 @@
+﻿@model TheSocialNetwork.Models.IndexViewModel
+@{
+    ViewBag.Title = "Manage";
+}
+
+<h2>@ViewBag.Title.</h2>
+
+<p class="text-success">@ViewBag.StatusMessage</p>
+<div>
+    <h4>Change your account settings</h4>
+    <hr />
+    <dl class="dl-horizontal">       
+        <dt>Unread messages:</dt>
+        <dd>
+            @Model.UnreadMessages
+        </dd>
+        <dt>Last login date:</dt>
+        <dd>
+            @Model.LastLogin
+        </dd>
+
+        <dt>Logins this month:</dt>
+        <dd>
+            @Model.AmountOfLogins
+        </dd>
+
+    </dl>
+</div>

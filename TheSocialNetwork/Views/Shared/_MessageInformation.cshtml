@@ -1,0 +1,41 @@
+﻿@model TheSocialNetwork.Models.Messages.MessageInforationViewModel
+<!--
+    <div>
+    Total messages: @Model.TotalAmountOfMessages
+    Read messages: @Model.TotalAmountOfReadMessages
+    Deleted messages: @Model.TotalAmountOfDeletedMessages
+</div>
+-->
+
+@{
+    ViewBag.Title = "Statistics";
+}
+
+<h2>Message Statistics</h2>
+
+<table class="table" style="width:100%">
+    <tr>
+        <th>
+            Total
+        </th>
+        <th>
+            Read
+        </th>
+        <th>
+            Deleted
+        </th>
+    </tr>
+
+    <tr>
+        <td>
+            @Html.DisplayFor(model => model.TotalAmountOfMessages)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.TotalAmountOfReadMessages)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.TotalAmountOfDeletedMessages)
+        </td>
+    </tr>
+
+</table>

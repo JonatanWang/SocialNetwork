@@ -1,0 +1,74 @@
+﻿@model TheSocialNetwork.Models.Messages.ReadIndexViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<div>
+    @if (TempData["message"] != null)
+    {
+        if (TempData["message"].ToString().ToLower().Contains("fail"))
+        {
+            <h3 style="color:orangered">@TempData["message"]</h3>
+        }
+        else
+        {
+            <h3 style="color:forestgreen">@TempData["message"]</h3>
+        }
+    }
+</div>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Messages)
+        </th>
+        <th>
+            @Html.DisplayFor(model => model.UnreadMessages) <text> unread</text>
+        </th>
+    </tr>
+
+@foreach (var item in Model.Messages) {
+    <!--
+          <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Key)
+        </td>
+        <td>
+            @Html.ActionLink("Details", "MessagesByUser", new { id=item.First().SenderID })
+        </td>
+    </tr>
+    -->
+    if (!item.All(m => m.IsRead))
+    {
+        <tr class="label-danger">
+            <td>
+                @Html.DisplayFor(modelItem => item.Key)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "MessagesByUser", new { id = item.First().SenderID })
+                @Html.ActionLink("Delete", "Delete", new { id = item.First().ID })
+            </td>
+        </tr>
+    }
+    else
+    {
+        <tr class="text-success">
+            <td>
+                @Html.DisplayFor(modelItem => item.Key)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "MessagesByUser", new { id = item.First().SenderID })
+                @Html.ActionLink("Delete", "Delete", new { id = item.First().ID })
+            </td>
+        </tr>
+    }
+}
+
+</table>
+
+@Html.Partial("_MessageInformation", Model.infoModel)
